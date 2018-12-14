@@ -1,7 +1,7 @@
 
 let valuesArray = [];
 let timeArray = [];
-let samplesSource = 'WIN-9DBOGP80695.Simulation00085';
+let samplesSource = 'WIN-9DBOGP80695.Simulation00052';
 let chartType = {
     bar: 'bar',
     line: 'line'
@@ -9,14 +9,16 @@ let chartType = {
 
 const option = {
     title: {
-        text: samplesSource
+        text: samplesSource,
+        // textStyle: {align: center}
     },
     tooltip: {},
     legend: {
         data:[]
     },
     xAxis: {
-        data: timeArray
+        data: timeArray,
+        // category: 'time'
     },
     yAxis: {},
     series: [{
@@ -28,16 +30,13 @@ const option = {
 
 async function getValues() {
     try {
-        let data = await fetch(`./data/WIN-9DBOGP80695.Simulation00085.json`);
+        let data = await fetch(`./data/WIN-9DBOGP80695.Simulation00052.json`);
         let SampleValues = await data.json();
         console.log(SampleValues);
         SampleValues.forEach(value => {
             // console.log(value.Value);
             // console.log(value.TimeStamp);
             timeArray.push(simplifyTime(value.TimeStamp));
-            const date = new Date(value.TimeStamp);
-            timeArray.push(Math.floor(date.getTime() / 1000));
-            console.log('Time array ' + timeArray);
             // valuesArray.push(Math.ceil(value.Value));
             valuesArray.push((parseInt(value.Value)).toFixed(0));
             plotChart();
