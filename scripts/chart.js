@@ -55,6 +55,13 @@ function simplifyTime(timestamp) {
     return Math.floor(date.getTime() / 1000);
 }
 
+let plot = echarts.init(document.querySelector('#main'));
+
+function plotChart() {
+    plot.setOption(option);
+}
+
+
 
 
 // function sliceTimestamps() {
@@ -63,14 +70,11 @@ function simplifyTime(timestamp) {
 //     });
 // }
 
-let plot = echarts.init(document.querySelector('#main'));
 
 
 // let timeArray2 = timeArray.map(timestamp => timestamp.slice(0, 19));
 // let timeArray3 = timeArray2.map(timestamp => timestamp.slice(11));
 
 
-function plotChart() {
-    plot.setOption(option);
-}
+
 
