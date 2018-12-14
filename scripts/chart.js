@@ -1,6 +1,11 @@
+
 let valuesArray = [];
 let timeArray = [];
 let samplesSource = 'WIN-9DBOGP80695.Simulation00085';
+let chartType = {
+    bar: 'bar',
+    line: 'line'
+};
 
 const option = {
     title: {
@@ -8,7 +13,7 @@ const option = {
     },
     tooltip: {},
     legend: {
-        data:[samplesSource]
+        data:[]
     },
     xAxis: {
         data: timeArray
@@ -16,7 +21,7 @@ const option = {
     yAxis: {},
     series: [{
         name: samplesSource,
-        type: 'bar',
+        type: chartType.bar,
         data: valuesArray
     }]
 };
@@ -33,9 +38,8 @@ async function getValues() {
             const date = new Date(value.TimeStamp);
             timeArray.push(Math.floor(date.getTime() / 1000));
             console.log('Time array ' + timeArray);
-            // valuesArray.push(value.Value);
-            // timeArray.push(value.TimeStamp);
-            // timeArray.forEach(value => console.log(new Date(value)));
+            // valuesArray.push(Math.ceil(value.Value));
+            valuesArray.push((parseInt(value.Value)).toFixed(0));
             plotChart();
         })
     } catch (e) {
@@ -44,9 +48,14 @@ async function getValues() {
 }
 
 function simplifyTime(timestamp) {
+    // const date = new Date('2018-10-02T11:30:07.211Z');
+    // const milliseconds = date.getTime();
+    // const seconds = Math.floor(date.getTime() / 1000);
     const date = new Date(timestamp);
     return Math.floor(date.getTime() / 1000);
 }
+
+
 
 // function sliceTimestamps() {
 //     timeArray.forEach(timestamp => {
@@ -60,8 +69,6 @@ let plot = echarts.init(document.querySelector('#main'));
 // let timeArray2 = timeArray.map(timestamp => timestamp.slice(0, 19));
 // let timeArray3 = timeArray2.map(timestamp => timestamp.slice(11));
 
-
-// let timeArray2 = timeArray.map(timestamp => new Date(timestamp));
 
 function plotChart() {
     plot.setOption(option);
