@@ -59,16 +59,6 @@ function plotChart() {
 
 
 
-// function sliceTimestamps() {
-//     timeArray.forEach(timestamp => {
-//         timestamp.slice(0, 19);
-//     });
-// }
-
-
-
-// let timeArray2 = timeArray.map(timestamp => timestamp.slice(0, 19));
-// let timeArray3 = timeArray2.map(timestamp => timestamp.slice(11));
 
 
 
