@@ -37,9 +37,9 @@ async function getValues() {
         console.log('button clicked');
 
         let xhr = new XMLHttpRequest();
-        xhr.open('GET', `${API.url}`, true);
-        xhr.setRequestHeader('Authorization', 'Bearer ' + API.access_token);
-        // xhr.open('GET', `./data/WIN-9DBOGP80695.Simulation00052 - OG.json`, true);
+        // xhr.open('GET', `${API.url}`, true);
+        // xhr.setRequestHeader('Authorization', 'Bearer ' + API.access_token);
+        xhr.open('GET', `./data/WIN-9DBOGP80695.Simulation00052 - OG.json`, true);
 
         xhr.onload = async () => {
             if(xhr.status === 200) {
@@ -47,9 +47,7 @@ async function getValues() {
                 let historianData = await JSON.parse(xhr.responseText);
                 let timeStampsAndValues = historianData.Data[0].Samples;
                 console.log(timeStampsAndValues);
-                timeStampsAndValues.forEach(value => {
-                    console.log(value.Value);
-                    console.log(value.TimeStamp);
+                timeStampsAndValues.forEach(value => {                    
                     timeArray.push(simplifyTime(value.TimeStamp));
                     // valuesArray.push(Math.ceil(value.Value));
                     valuesArray.push((parseInt(value.Value)).toFixed(0));
